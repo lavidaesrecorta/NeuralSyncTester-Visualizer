@@ -27,12 +27,17 @@
         <SurfaceChart chartObject={chart} />
     {/each}
 </div> -->
+
+<div class="w-full flex justify-center">
+    <div class="w-full md:max-w-3xl">
+        {#each Object.values(data.sessions) as session}
+        <SessionSummary session={session} />
+        {/each}
+    </div>
+</div>
 <style>
     .surface-charts{
         height: 100vh;
         width: 100%;
     }
 </style>
-{#each Object.values(data.sessions) as session}
-    <SessionSummary session={session} />
-{/each}

@@ -25,13 +25,13 @@ export const chartSurfaceTypes = {
     'H_vs_N0':{
         title: "Número de Capas vs Cantidad de estímulos en la primera capa",
         xAxisLabel: "Número de Capas",       
-        yAxisLabel: "Cantidad de estímulos en la primera capa",       
+        yAxisLabel: "Cantidad de estímulos",       
         zAxisLabel: "Iteraciones",       
     },
     'M_vs_N0': {
         title: "Profundidad de Estímulos de entrada vs Cantidad de estímulos en la primera capa",
         xAxisLabel: "Profundidad de Estímulos de entrada",       
-        yAxisLabel: "Cantidad de estímulos en la primera capa",       
+        yAxisLabel: "Cantidad de estímulos",       
         zAxisLabel: "Iteraciones",       
     },
 }
@@ -45,6 +45,7 @@ export const getSeriesFromSet = (dataArray: any[]) => {
         const axisLabel = zGraphLabels[element] ?? element
         const newEntry = {
             type: 'bar3D',
+            shading: 'lambert',
             coordinateSystem: 'cartesian3D',
             name: axisLabel,
             data: dataArray.map(d => [d[0],d[1],d[index]]),

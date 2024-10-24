@@ -2,7 +2,7 @@
     import { Chart } from 'svelte-echarts';
     import { onMount } from 'svelte';
     import { init, use } from 'echarts/core';
-    import { TitleComponent, TooltipComponent, VisualMapComponent, LegendComponent } from 'echarts/components';
+    import { TitleComponent, TooltipComponent, ToolboxComponent, VisualMapComponent, LegendComponent } from 'echarts/components';
     import { CanvasRenderer } from 'echarts/renderers';
 	import { zGraphLabels } from './chartUtils';
   
@@ -23,7 +23,7 @@
         }
   
         // Register the components including SurfaceChart and Grid3D
-        use([Bar3DChart, TitleComponent, CanvasRenderer, TooltipComponent, VisualMapComponent, LegendComponent, Grid3DComponent]);
+        use([Bar3DChart, TitleComponent, CanvasRenderer, TooltipComponent, ToolboxComponent, VisualMapComponent, LegendComponent, Grid3DComponent]);
 
         const selectedLabels = {}
 
@@ -36,23 +36,32 @@
         // Set up the chart options with cartesian3D coordinate system
         options = {
           title: {
-            text: 'ECharts GL Surface Example',
+            // text: chartObject.chartType.title,
+            text: "",
           },
           tooltip: {trigger: 'item',
-          formatter(params) {
-            
-    return `${params.marker} ${params.seriesName}
-    <br /><b><p>${chartObject.chartType.xAxisLabel}: ${params.value[0]}
-    <br />${chartObject.chartType.yAxisLabel}: ${params.value[1]}
-    <br />${chartObject.chartType.zAxisLabel}: ${params.value[2]}</p></b>`;
-  }},
+          formatter(params) { 
+            return `${params.marker} ${params.seriesName}
+            <br /><b><p>${chartObject.chartType.xAxisLabel}: ${params.value[0]}
+            <br />${chartObject.chartType.yAxisLabel}: ${params.value[1]}
+            <br />${chartObject.chartType.zAxisLabel}: ${params.value[2]}</p></b>`;
+          }},
+          toolbox: {
+            show: true,
+            feature: {
+              restore: {},
+              saveAsImage: {}
+            }
+          },
           legend: {
             data: Object.values(zGraphLabels),
-            selected: selectedLabels
+            selected: selectedLabels,
+            top: 35,
             },
           visualMap: {
+            show: false,
             min: 0,
-            max: 2000,
+            max: 250000,
             dimension: 2,
             inRange: {
               color: ['#50a3f1', '#eac763', '#d94e5d'],
@@ -60,11 +69,11 @@
           },
           // Define 3D axes
           xAxis3D: {
-            type: 'value',
+            type: 'category',
             name: chartObject.chartType.xAxisLabel,
           },
           yAxis3D: {
-            type: 'value',
+            type: 'category',
             name: chartObject.chartType.yAxisLabel,
           },
           zAxis3D: {
@@ -88,16 +97,17 @@
     });
   </script>
   
-  <div class="app">
+  <div class="display">
     {#if options.title}
       <Chart {init} {options} />
     {/if}
   </div>
   
   <style>
-    .app {
+    .display {
       width: 100%;
       height: 100%;
+      padding: 10px;
     }
   </style>
   
