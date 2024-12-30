@@ -15,7 +15,6 @@
     <a href="/">Sesiones Activas</a>
     <a href="/counts">Porcentajes de Finalización</a>
     <a href="/surfaces">Superficies 3D</a>
-    <a href="/realtime">Demostracion Tiempo-Real</a>
     {/if}
   </div>
   <div class="container">

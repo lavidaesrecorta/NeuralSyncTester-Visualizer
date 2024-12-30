@@ -1,0 +1,17 @@
+{
+    "Z_axis": "Iterations",
+    "H_axis": "Number of Layers (H)",
+    "L_axis": "Synaptic Weigths Depth (L)",
+    "M_axis": "First Stimulus Layer Depth (M)",
+    "N_0_axis": "Initial Stimulus Size (N_0)",
+    "data_size_axis": "Data Size (bytes)",
+    "NO_OVERLAP_scenario": "Without Overlap",
+    "PARTIALLY_CONNECTED_scenario": "Partial Overlap",
+    "FULLY_CONNECTED_scenario": "Fully Connected",
+    "stimulate_min": "Minimum of Total Stimulations",
+    "stimulate_max": "Maximum of Total Stimulations",
+    "stimulate_avg": "Average of Total Stimulations",
+    "learn_min": "Minimum of Learnings",
+    "learn_max": "Maximum of Learnings",
+    "learn_avg": "Average of Learnings"
+}

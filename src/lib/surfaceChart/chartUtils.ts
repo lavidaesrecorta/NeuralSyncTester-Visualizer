@@ -57,3 +57,13 @@ export const getSeriesFromSet = (dataArray: any[]) => {
     return newSeries
     
 }
+
+
+enum zColumnId {
+    STIM_MIN="stimulate_min",
+    STIM_MAX="stimulate_max",
+    STIM_AVG="stimulate_avg",
+    LEARN_MIN="learn_min",
+    LEARN_MAX="learn_max",
+    LEARN_AVG="learn_avg",
+}

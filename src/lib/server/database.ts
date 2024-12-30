@@ -14,10 +14,13 @@ export interface OpenSession{
     CurrentSessionCount: number,
 }
 
+
+
 export const getOpenSessions = async () => {
     const openSessionsEndpoint = `http://${BACKEND_URL}:${BACKEND_PORT}/sessions`
     return (await fetch(openSessionsEndpoint)).json()
 }
+
 
 export const getSurfaceGraphs = async (refresh:boolean) => {
     const openSessionsEndpoint = refresh ?  `http://${BACKEND_URL}:${BACKEND_PORT}/sessionStats-refresh` : `http://${BACKEND_URL}:${BACKEND_PORT}/sessionStats`
@@ -28,4 +31,10 @@ export const getSessionCounts = async (refresh:boolean) => {
     const openSessionsEndpoint = refresh ?  `http://${BACKEND_URL}:${BACKEND_PORT}/sessionCount-refresh` : `http://${BACKEND_URL}:${BACKEND_PORT}/sessionCount`
 
     return (await fetch(openSessionsEndpoint)).json()
+}
+
+export const getSessionConfig = async (uid:string) => {
+    const openSessionsEndpoint = `http://${BACKEND_URL}:${BACKEND_PORT}/get-config?id=${uid}`
+    return (await fetch(openSessionsEndpoint)).json()
+
 }
