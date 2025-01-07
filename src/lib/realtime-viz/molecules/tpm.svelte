@@ -3,7 +3,7 @@
     import Layer from "./layer.svelte";
 
     export let TPM_config: TPMConfig
-    export let showWeights = true
+    export let showWeights = false
     export let inverted = false
     export let align = "middle"
 
@@ -16,7 +16,6 @@
     const output_y = get_output_y(TPM_config,showWeights, align)
 
     $: output = layers_outputs[layers_outputs.length-1].reduce((accumulator,currentValue)=>accumulator*currentValue)
-
     export let x = 0
     export let y = 0
 

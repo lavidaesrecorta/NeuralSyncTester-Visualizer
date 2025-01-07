@@ -13,5 +13,6 @@
     "stimulate_avg": "Average of Total Stimulations",
     "learn_min": "Minimum of Learnings",
     "learn_max": "Maximum of Learnings",
-    "learn_avg": "Average of Learnings"
+    "learn_avg": "Average of Learnings",
+    "learnRule": "Learning Rule"
 }

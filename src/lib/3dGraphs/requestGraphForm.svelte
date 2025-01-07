@@ -2,11 +2,29 @@
     import { _ } from 'svelte-i18n'
 	import type { GraphRequestData } from './chartUtils';
     export let formLabels   
-    export let requestFunction = (postData: GraphRequestData) => {}
+    export let requestFunction = async (postData: GraphRequestData) => {}
+
+    let status = "disabled"
+    const executeRequest = async (postData: GraphRequestData) => {
+        status="loading"
+        try {
+            await requestFunction(postData)
+        } catch (error) {
+            console.log("e: ", error);
+            status = "error"
+            
+        }
+
+        status="success"
+    }
 
 
-    const executeRequest = (postData: GraphRequestData) => {
-        requestFunction(postData)
+    const checkReady = () => {
+        if (postData.X == "" || postData.Y =="") {
+            status="disabled"
+            return
+        }
+        status="ready"
     }
 
     let postData: GraphRequestData = {
@@ -21,19 +39,19 @@
 
 <div class="flex flex-col p-4 gap-2">
     <label for="">Learn Rule:</label>
-    <select name="" id="" bind:value={postData.LearnRule} >
+    <select  class="rounded-sm" name="" id="" bind:value={postData.LearnRule} >
         {#each formLabels["learnRulesLabels"] as [rule,label]}
             <option value={rule}>{label}</option>
         {/each}
     </select>
     <label for="" >Scenario:</label>
-    <select name="" id="" bind:value={postData.Scenario} >
+    <select  class="rounded-sm" name="" id="" bind:value={postData.Scenario} >
         {#each formLabels["scenarioLabels"] as [scenario,label]}
             <option value={scenario}>{label}</option>
         {/each}
     </select>
     <label for="">Axis X:</label>
-    <select bind:value={postData.X} name="" id="">
+    <select  class="rounded-sm" bind:value={postData.X} on:change={()=>{checkReady()}} name="" id="">
         <option value="none" selected disabled hidden>Select an Option</option>
         {#each formLabels["axisLabels"] as [axis,label]}
             <option  value={axis} disabled={axis==postData.Y}>{label}</option>
@@ -41,12 +59,38 @@
     </select>
 
     <label for="">Axis Y:</label>
-    <select bind:value={postData.Y} name="" id="">
+    <select class="rounded-sm" bind:value={postData.Y} on:change={()=>{checkReady()}} name="" id="">
         <option value="none" selected disabled hidden>Select an Option</option>
         {#each formLabels["axisLabels"] as [axis,label]}
             <option value={axis} disabled={axis==postData.X}>{label}</option>
         {/each}
     </select>
 
-    <button class="my-2" on:click={()=> executeRequest(postData)}>Request Graph</button>
+    <button  on:click={()=> executeRequest(postData)} class={`${status=="loading"? "loading" : ""} my-2 rounded-sm`} disabled={status!="ready"} >{status=="loading"?"Loading...":"Request Graph"}</button>
 </div>
+
+
+
+
+
+<style>
+
+button{
+        border: 1px solid gray;
+        padding: 6px 12px;
+        background-color: rgb(30 41 59);
+        color: azure;
+        font-weight: bold;
+    }
+
+    .loading{
+        color:gray
+    }
+
+
+    select{
+        padding: 4px;
+    }
+</style>
+
+

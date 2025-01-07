@@ -28,7 +28,7 @@
 
 </script>
 
-<rect x={x} y={y} width={neuron_width} height={neuron_height}  fill={"red"} stroke="red" stroke-width="0" />
+<rect x={x} y={y} width={neuron_width} height={neuron_height}  fill={getColor(output)} stroke="red" stroke-width="0" />
 {#if showWeights}
     {#each weights as weight,j}
         <circle cx={x+weight_center} cy={y+weight_offset(j)} r={weight_radius} stroke="black" stroke-width="2" fill={getColor(weight)}/>

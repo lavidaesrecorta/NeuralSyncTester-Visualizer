@@ -71,7 +71,8 @@ const formLabels = {
 
 </script>
 
-<div class="md:w-full md:h-full grid grid-cols-[1fr_1fr]">
+<div class="md:w-full md:p-24 md:h-full grid grid-cols-[1fr_1fr] gap-4">
+    <h1 class="text-3xl col-span-2">3D Iterations Graph</h1>
     {#each graphObjects as graph}
         <Bar3d chartObject={graph} />
     {/each}
