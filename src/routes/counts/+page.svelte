@@ -2,19 +2,17 @@
 	import IterationHistogramForm from "$lib/sessionCount/iterationHistogramForm.svelte";
 import IterationHistogramGraph from "$lib/sessionCount/iterationHistogramGraph.svelte";
 import type { HistogramEntry, IterationHistogramRequestBody } from "$lib/sessionCount/sessionCount";
+	import { t } from "$lib/translations";
 	import { onMount } from "svelte";
-	import { _ } from "svelte-i18n";
 
     
     let status = "waiting"
 
     const postData: IterationHistogramRequestBody = {
         TableName: "sessions",
+        BucketColumn: "tpm_type",
         Scenario: "NO_OVERLAP",
         LearnRule: "HEBBIAN",
-        Min: 500,
-        Max: 500_000,
-        BucketCount: 32
     }
 
     let axisData
@@ -44,17 +42,17 @@ import type { HistogramEntry, IterationHistogramRequestBody } from "$lib/session
     if (loadedSeries == null || loadedSeries.length == 0) return
     
     axisData = {
-                name: $_("RangeLabel"),
+                name: $t("counts.RangeLabel"),
                 data: loadedSeries.map((entry: HistogramEntry) => {return entry.RangeLabel})
             }
 
     seriesData = [
         {
-            name: $_("FinishedPercentage"),
+            name: $t("FinishedPercentage"),
             data: loadedSeries.map((entry: HistogramEntry) => {return (entry.FinishedCount/entry.TotalCount) * 100})
         },
         {
-            name: $_("LearnPercentage"),
+            name: $t("LearnPercentage"),
             data: loadedSeries.map((entry: HistogramEntry) => {return (entry.AvgLearn/entry.AvgStim) * 100})
         },
         // {
@@ -81,7 +79,7 @@ import type { HistogramEntry, IterationHistogramRequestBody } from "$lib/session
     {#if loadedSeries!=null && axisData != null}
     <IterationHistogramGraph axisData={axisData} seriesData={seriesData} />
     {:else if status != "waiting"}
-    <h2 class="text-xl text-center">No data available for this query.</h2>
+    <h2 class="text-xl text-center">{$t("counts.noData")}</h2>
     {/if}
 </div>
 

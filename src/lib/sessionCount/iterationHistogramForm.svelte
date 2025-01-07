@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { Axis } from "echarts";
 import type { IterationHistogramRequestBody } from "./sessionCount";
-	import { _ } from "svelte-i18n";
-
+import { t } from '$lib/translations';
 
     export let executeQuery = (postData: IterationHistogramRequestBody) => {}
 
@@ -19,10 +18,10 @@ import type { IterationHistogramRequestBody } from "./sessionCount";
 
 </script>
 <div class="form-hist">
-    <label for="">$_("GraphGroups")</label>
+    <label for="">{$t("counts.graphGroups")}</label>
     <select name="" id="" bind:value={postData.BucketColumn}>
         {#each validXAxis as axis}
-        <option value={axis}>{$_(axis)}</option>
+        <option value={axis}>{$t(axis)}</option>
         {/each}
     </select>
 <h2 class="text-2xl mt-4">$_("formFilter")</h2>
@@ -31,7 +30,7 @@ import type { IterationHistogramRequestBody } from "./sessionCount";
 <label for="">$_("Scenario")</label>
 <select name="" id="" bind:value={postData.Scenario}>
     {#each validScenarios as scenario}
-    <option value={scenario}>{$_(scenario)}</option>
+    <option value={scenario}>{$t(scenario)}</option>
     {/each}
 </select>
 {/if}
@@ -39,7 +38,7 @@ import type { IterationHistogramRequestBody } from "./sessionCount";
 <label for="">$_("LearnRule")</label>
 <select name="" id="" bind:value={postData.LearnRule}>
     {#each validRules as rule}
-    <option value={rule}>{$_(rule)}</option>
+    <option value={rule}>{$t(rule)}</option>
     {/each}
 </select>
 {/if}

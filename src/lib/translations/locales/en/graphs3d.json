@@ -1,0 +1,13 @@
+{
+    "title": "3D Iterations Graph",
+    "form":{
+        "learnRule": "Learn Rule",
+        "tpm_type": "Scenario",
+        "xAxis": "X Axis",
+        "yAxis": "Y Axis"
+    },
+    "FinishedPercentage":"Finished Sessions Percentage",
+    "LearnPercentage":"Learn Iterations Percentage",
+    "noData": "There is no data available for the requested query.",
+    "graphGrpus": "Group sessions by:"
+}

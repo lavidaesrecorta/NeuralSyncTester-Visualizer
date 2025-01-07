@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { _ } from 'svelte-i18n'
 	import type { GraphRequestData } from './chartUtils';
     export let formLabels   
     export let requestFunction = async (postData: GraphRequestData) => {}
@@ -38,19 +37,19 @@
 </script>
 
 <div class="flex flex-col p-4 gap-2">
-    <label for="">Learn Rule:</label>
+    <label for="">{formLabels.form.learnRule}:</label>
     <select  class="rounded-sm" name="" id="" bind:value={postData.LearnRule} >
         {#each formLabels["learnRulesLabels"] as [rule,label]}
             <option value={rule}>{label}</option>
         {/each}
     </select>
-    <label for="" >Scenario:</label>
+    <label for="" >{formLabels.form.tpm_type}:</label>
     <select  class="rounded-sm" name="" id="" bind:value={postData.Scenario} >
         {#each formLabels["scenarioLabels"] as [scenario,label]}
             <option value={scenario}>{label}</option>
         {/each}
     </select>
-    <label for="">Axis X:</label>
+    <label for="">{formLabels.form.xAxis}:</label>
     <select  class="rounded-sm" bind:value={postData.X} on:change={()=>{checkReady()}} name="" id="">
         <option value="none" selected disabled hidden>Select an Option</option>
         {#each formLabels["axisLabels"] as [axis,label]}
@@ -58,7 +57,7 @@
         {/each}
     </select>
 
-    <label for="">Axis Y:</label>
+    <label for="">{formLabels.form.yAxis}::</label>
     <select class="rounded-sm" bind:value={postData.Y} on:change={()=>{checkReady()}} name="" id="">
         <option value="none" selected disabled hidden>Select an Option</option>
         {#each formLabels["axisLabels"] as [axis,label]}

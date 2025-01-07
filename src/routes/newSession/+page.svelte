@@ -2,7 +2,7 @@
 	import NewOverlapSessionForm from "$lib/sessionSummary/newOverlapSessionForm.svelte";
 	import NewNoOverlapSessionForm from "$lib/sessionSummary/newNoOverlapSessionForm.svelte";
 	import type { NewNoOverlapRequestBody, NewOverlapRequestBody } from "$lib/sessionSummary/sessionRequestTypes";
-    import { _ } from 'svelte-i18n'
+	import { t } from "$lib/translations";
 
 	const tpmScenarios = ["NO_OVERLAP","PARTIALLY_CONNECTED","FULLY_CONNECTED"]
 
@@ -41,7 +41,7 @@
 
 <select name="" id="" bind:value={selectedScenario}>
 	{#each tpmScenarios as scenario}
-		<option value={scenario}>{$_(scenario)}</option>
+		<option value={scenario}>{$t(scenario)}</option>
 	{/each}
 </select>
 {#if selectedScenario=="NO_OVERLAP"}

@@ -1,7 +1,7 @@
 <script>
     import "../app.css";
     import Hamburguer from "$lib/ui/hamburguer.svelte";
-
+	import { t } from "$lib/translations";
     let sidebarClosed = true
 
   </script>
@@ -12,9 +12,9 @@
     </div>
 
     {#if !sidebarClosed}
-    <a href="/">Sesiones Activas</a>
-    <a href="/counts">Porcentajes de Finalización</a>
-    <a href="/graphs3d">Superficies 3D</a>
+    <a href="/">{$t("sidebar.activeSessions")}</a>
+    <a href="/counts">{$t("sidebar.successHistogram")}</a>
+    <a href="/graphs3d">{$t("sidebar.graphs3D")}</a>
     {/if}
   </div>
   <div class="container">

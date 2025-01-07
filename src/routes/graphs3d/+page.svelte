@@ -2,16 +2,16 @@
 	import Bar3d from "$lib/3dGraphs/bar3d.svelte";
 	import { availableAxis, availableLearnRules, availableScenarios, getSeriesFromSet, type ChartData3D, type GraphRequestData } from "$lib/3dGraphs/chartUtils";
 	import RequestGraphForm from "$lib/3dGraphs/requestGraphForm.svelte";
-    import { _ } from 'svelte-i18n'
+	import { t } from "$lib/translations";
 
 const getLabel = (labelName: string) => {
     const labelLocaleName = `${labelName}_axis`
-    return $_(labelLocaleName)
+    return $t(labelLocaleName)
 }
 
 const getHeaderLegends = (labels: string[]) => {
     let newLabels = labels.slice(2)
-    newLabels = newLabels.map((element:string) => $_(element))
+    newLabels = newLabels.map((element:string) => $t(element))
     return newLabels
 }
 
@@ -20,7 +20,7 @@ const getDefaultLegend = (labels: string[]) => {
     for (let i = 0; i < labels.length; i++) {
         const element = labels[i];
         let setDefault = false      
-        if (element == $_("stimulate_avg")) setDefault = true
+        if (element == $t("stimulate_avg")) setDefault = true
         output[element]=setDefault
     }
     
@@ -48,7 +48,7 @@ const getDataFromAPI = async (postData: GraphRequestData) => {
         labels: {
             xLabel: getLabel(postData.X),
             yLabel: getLabel(postData.Y),
-            zLabel: $_("Z_axis"),
+            zLabel: $t("Z_axis"),
             defaultLegend: defaultLegend,
             legends: legends
         }
@@ -64,15 +64,21 @@ const getDataFromAPI = async (postData: GraphRequestData) => {
 
 
 const formLabels = {
-    axisLabels: availableAxis.map((element) =>  {return [element, $_(`${element}_axis`)]}),
-    learnRulesLabels: availableLearnRules.map((element) =>  {return [element, $_(element)]}),
-    scenarioLabels: availableScenarios.map((element) =>  {return [element, $_(`${element}_scenario`)]}),
+    form: {
+        learnRule: $t("graphs3d.form.learnRule"),
+        tpm_type: $t("graphs3d.form.tpm_type"),
+        xAxis: $t("graphs3d.form.xAxis"),
+        yAxis: $t("graphs3d.form.yAxis"),
+    },
+    axisLabels: availableAxis.map((element) =>  {return [element, $t(`${element}_axis`)]}),
+    learnRulesLabels: availableLearnRules.map((element) =>  {return [element, $t(element)]}),
+    scenarioLabels: availableScenarios.map((element) =>  {return [element, $t(`${element}_scenario`)]}),
 }
 
 </script>
 
 <div class="md:w-full md:p-24 md:h-full grid grid-cols-[1fr_1fr] gap-4">
-    <h1 class="text-3xl col-span-2">3D Iterations Graph</h1>
+    <h1 class="text-3xl col-span-2">{$t("graphs3d.title")}</h1>
     {#each graphObjects as graph}
         <Bar3d chartObject={graph} />
     {/each}

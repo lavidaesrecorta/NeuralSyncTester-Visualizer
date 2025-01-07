@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { _ } from 'svelte-i18n'
+	import { t } from '$lib/translations';
 	import type { NewNoOverlapRequestBody } from './sessionRequestTypes';
     export let executeNoOverlapRequest = async (postData: NewNoOverlapRequestBody) => {}
 
@@ -36,29 +36,29 @@ const onLayerCountChange = () => {
     <select  class="rounded-sm" name="" id="" bind:value={postData.Rule} >
 
     </select> -->
-    <label for="" >{$_("H")}</label>
+    <label for="" >{$t("H")}</label>
     <input bind:value={layerCount} on:change={()=>{onLayerCountChange()}} type="number" name=""  min="1" max="128">
 
-    <label for="" >{$_("N")}</label>
+    <label for="" >{$t("N")}</label>
     <div class="flex gap-4 overflow-scroll">
         {#each postData.N as stimulusCount}
         <input bind:value={stimulusCount} type="number" name=""  min="2" max="128" id="">
         {/each}
     </div>
 
-    <label for="" >{$_("K_LAST")}</label>
+    <label for="" >{$t("K_LAST")}</label>
     <input bind:value={postData.K_last} type="number" name=""  min="2" max="128" id="">
 
-    <label for="" >{$_("L")}</label>
+    <label for="" >{$t("L")}</label>
     <input bind:value={postData.L} type="number" name=""  min="1" max="127" id="">
 
-    <label for="" >{$_("M")}</label>
+    <label for="" >{$t("M")}</label>
     <input bind:value={postData.M} type="number" name=""  min="1" max="127" id="">
 
-    <label for="" >{$_("MaxSessionCount")}</label>
+    <label for="" >{$t("MaxSessionCount")}</label>
     <input bind:value={postData.MaxSessionCount} type="number" name=""  min="1" id="">
 
-    <label for="" >{$_("MaxIterations")}</label>
+    <label for="" >{$t("MaxIterations")}</label>
     <input bind:value={postData.MaxIterations} type="number" name=""  min="1" id="">
 
     <button  on:click={()=> executeNoOverlapRequest(postData)} class={`${status=="loading"? "loading" : ""} my-2 rounded-sm`} disabled={status!="ready"} >{status=="loading"?"Loading...":"Request new Session"}</button>
