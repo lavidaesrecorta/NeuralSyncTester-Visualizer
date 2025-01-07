@@ -1,40 +1,48 @@
 <script lang="ts">
-	import type { IterationHistogramRequestBody } from "./sessionCount";
+	import { Axis } from "echarts";
+import type { IterationHistogramRequestBody } from "./sessionCount";
 	import { _ } from "svelte-i18n";
 
 
     export let executeQuery = (postData: IterationHistogramRequestBody) => {}
 
-    const validScenarios = ["NO_OVERLAP", "PARTIALLY_CONNECTED", "FULLY_CONNECTED"]
-    const validRules = ["HEBBIAN","ANTI-HEBBIAN","RANDOM-WALK"]
+    const validXAxis = ["tpm_type","learn_rule"]
+    const validScenarios = ["none","NO_OVERLAP", "PARTIALLY_CONNECTED", "FULLY_CONNECTED"]
+    const validRules = ["none","HEBBIAN","ANTI-HEBBIAN","RANDOM-WALK"]
 
     const postData: IterationHistogramRequestBody = {
         TableName: "sessions",
+        BucketColumn: validXAxis[0],
         Scenario: validScenarios[0],
-        LearnRule: validRules[0],
-        Min: 500,
-        Max: 500_000,
-        BucketCount: 32
+        LearnRule: validRules[0]    
     }
 
 </script>
 <div class="form-hist">
-    <label for="">$_("Scenario")</label>
-    <select name="" id="" bind:value={postData.Scenario}>
-        {#each validScenarios as scenario}
-        <option value={scenario}>{$_(scenario)}</option>
+    <label for="">$_("GraphGroups")</label>
+    <select name="" id="" bind:value={postData.BucketColumn}>
+        {#each validXAxis as axis}
+        <option value={axis}>{$_(axis)}</option>
         {/each}
     </select>
-    <label for="">$_("LearnRule")</label>
-    <select name="" id="" bind:value={postData.LearnRule}>
-        {#each validRules as rule}
-        <option value={rule}>{$_(rule)}</option>
-        {/each}
-    </select>
-    <label for="">$_("Min")</label>
-    <input type="number" name="" id="" bind:value={postData.Min} min="50">
-    <label for="">$_("Max")</label>
-    <input type="number" name="" id="" bind:value={postData.Max} max="900000">
+<h2 class="text-2xl mt-4">$_("formFilter")</h2>
+{#if postData.BucketColumn != "tpm_type"}
+    
+<label for="">$_("Scenario")</label>
+<select name="" id="" bind:value={postData.Scenario}>
+    {#each validScenarios as scenario}
+    <option value={scenario}>{$_(scenario)}</option>
+    {/each}
+</select>
+{/if}
+{#if postData.BucketColumn != "learn_rule"}
+<label for="">$_("LearnRule")</label>
+<select name="" id="" bind:value={postData.LearnRule}>
+    {#each validRules as rule}
+    <option value={rule}>{$_(rule)}</option>
+    {/each}
+</select>
+{/if}
 
     <button on:click={()=>{executeQuery(postData)}}>Filter Graph</button>
 </div>

@@ -1,10 +1,8 @@
 export interface IterationHistogramRequestBody {
     TableName: string;
+    BucketColumn: string;
     Scenario: string;
     LearnRule: string;
-    Min: number;
-    Max: number;
-    BucketCount: number;
   }
   
 export interface HistogramEntry {
