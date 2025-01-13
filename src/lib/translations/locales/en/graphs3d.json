@@ -4,10 +4,20 @@
         "learnRule": "Learn Rule",
         "tpm_type": "Scenario",
         "xAxis": "X Axis",
-        "yAxis": "Y Axis"
+        "axisValues": {"H":"Layer Count (H)", "N_0":"First Layer Stimulus Amount (N_0)", "M":"First Layer Stimulus Depth (M)", "L":"Synaptic Weights Depth (L)", "data_size":"Network Data Size"},
+        "yAxis": "Y Axis",
+        "zAxis": "Iterations",
+        "zAxisLabels": {
+            "stimulate_min":"Minimum total iterations",
+            "stimulate_max":"Maximum total iterations",
+            "stimulate_avg":"Average total iterations",
+            "learn_min":"Minimum learning iterations",
+            "learn_max":"Maximum learning iterations",
+            "learn_avg":"Average learning iterations"},
+        "scenarios": {"NO_OVERLAP":"No overlap", "FULLY_CONNECTED": "Complete overlap", "PARTIALLY_CONNECTED": "Partial overlap"},
+        "learnRules": {"HEBBIAN": "Hebbian", "ANTI-HEBBIAN":"Anti-Hebbian", "RANDOM-WALK":"Random-Walk"}
     },
     "FinishedPercentage":"Finished Sessions Percentage",
     "LearnPercentage":"Learn Iterations Percentage",
-    "noData": "There is no data available for the requested query.",
-    "graphGrpus": "Group sessions by:"
+    "noData": "There is no data available for the requested query."
 }

@@ -3,6 +3,10 @@ export interface IterationHistogramRequestBody {
     BucketColumn: string;
     Scenario: string;
     LearnRule: string;
+    CountUnfinished: boolean;
+    LimitDataSize: boolean;
+    MinDataSize: number;
+    MaxDataSize: number;
   }
   
 export interface HistogramEntry {
@@ -11,4 +15,5 @@ export interface HistogramEntry {
   TotalCount: number;
   AvgLearn: number;
   AvgStim: number;
+  AvgDataSize: number;
 }

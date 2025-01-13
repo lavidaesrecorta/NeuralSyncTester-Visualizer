@@ -5,13 +5,13 @@
 	import { t } from "$lib/translations";
 
 const getLabel = (labelName: string) => {
-    const labelLocaleName = `${labelName}_axis`
+    const labelLocaleName = `graphs3d.form.axisValues.${labelName}`
     return $t(labelLocaleName)
 }
 
 const getHeaderLegends = (labels: string[]) => {
     let newLabels = labels.slice(2)
-    newLabels = newLabels.map((element:string) => $t(element))
+    newLabels = newLabels.map((element:string) => $t(`graphs3d.form.zAxisLabels.${element}`))
     return newLabels
 }
 
@@ -20,7 +20,7 @@ const getDefaultLegend = (labels: string[]) => {
     for (let i = 0; i < labels.length; i++) {
         const element = labels[i];
         let setDefault = false      
-        if (element == $t("stimulate_avg")) setDefault = true
+        if (element == $t("graphs3d.form.zAxisLabels.stimulate_avg")) setDefault = true
         output[element]=setDefault
     }
     
@@ -48,7 +48,7 @@ const getDataFromAPI = async (postData: GraphRequestData) => {
         labels: {
             xLabel: getLabel(postData.X),
             yLabel: getLabel(postData.Y),
-            zLabel: $t("Z_axis"),
+            zLabel: $t("graphs3d.form.zAxis"),
             defaultLegend: defaultLegend,
             legends: legends
         }
@@ -70,9 +70,9 @@ const formLabels = {
         xAxis: $t("graphs3d.form.xAxis"),
         yAxis: $t("graphs3d.form.yAxis"),
     },
-    axisLabels: availableAxis.map((element) =>  {return [element, $t(`${element}_axis`)]}),
-    learnRulesLabels: availableLearnRules.map((element) =>  {return [element, $t(element)]}),
-    scenarioLabels: availableScenarios.map((element) =>  {return [element, $t(`${element}_scenario`)]}),
+    axisLabels: availableAxis.map((element) =>  {return [element, $t(`graphs3d.form.axisValues.${element}`)]}),
+    learnRulesLabels: availableLearnRules.map((element) =>  {return [element, $t(`graphs3d.form.learnRules.${element}`)]}),
+    scenarioLabels: availableScenarios.map((element) =>  {return [element, $t(`graphs3d.form.scenarios.${element}`)]}),
 }
 
 </script>

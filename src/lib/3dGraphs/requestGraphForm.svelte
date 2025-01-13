@@ -57,7 +57,7 @@
         {/each}
     </select>
 
-    <label for="">{formLabels.form.yAxis}::</label>
+    <label for="">{formLabels.form.yAxis}:</label>
     <select class="rounded-sm" bind:value={postData.Y} on:change={()=>{checkReady()}} name="" id="">
         <option value="none" selected disabled hidden>Select an Option</option>
         {#each formLabels["axisLabels"] as [axis,label]}

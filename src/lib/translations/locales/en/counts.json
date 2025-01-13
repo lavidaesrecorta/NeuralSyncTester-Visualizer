@@ -1,6 +1,32 @@
 {
+    "title":"Histogram",
     "FinishedPercentage":"Finished Sessions Percentage",
     "LearnPercentage":"Learn Iterations Percentage",
     "noData": "There is no data available for the requested query.",
-    "graphGrpus": "Group sessions by:"
+    "form": {
+        "graphGroups":"Group sessions by:",
+        "formFilter":"Filter sessions by:",
+        "learnRule":"Learning rule:",
+        "scenario":"Scenario:",
+        "finishedSessionBox":"Count finished sessions",
+        "finishedDataSize":"Limit Data size",
+        "xAxis": {"tpm_type": "Scenario","learn_rule": "Learning Rule"},
+        "scenarios": {"none": "Don't Filter","NO_OVERLAP": "Without overlap", "PARTIALLY_CONNECTED": "Partial overlap", "FULLY_CONNECTED": "Complete overlap"},
+        "learnRules": {"none": "Don't Filter","HEBBIAN": "Hebbian","ANTI-HEBBIAN": "Anti-Hebbian","RANDOM-WALK":"Random walk"},
+        "buttons": {"ready": "Filter Graph", "error": "An error has ocurred..."}
+    },
+    "graph": {
+        "FinishedPercentage" : "Success Percentage",
+        "LearnPercentage" : "Learning Iterations Percentage",
+        "UnfinishedCount" : "Unifished Sessions",
+        "TotalCount" : "All Sessions",
+        "FinishedCount" : "Finished Sessions",
+        "AvgDataSize" : "Average network data size"
+    },
+    "bucketLabels": {
+        "no_overlap":"No overlap",
+        "PARTIALLY_CONNECTED":"Partial overlap",
+        "FULLY_CONNECTED":"Complete overlap"
+    }
+
 }

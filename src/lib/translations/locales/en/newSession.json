@@ -1,0 +1,18 @@
+{
+    "scenarios":{
+        "NO_OVERLAP": "No overlap",
+        "FULLY_CONNECTED": "Complete overlap",
+        "PARTIALLY_CONNECTED": "Partial overlap"
+    },
+    "form": {
+        "H": "Layer count",
+		"K": "Neurons by layer",
+		"N": "Stimulus by layer",
+		"N_0": "First layer stimulus count",
+		"K_LAST": "Last layer neuron count",
+		"M": "First Layer Stimulus Depth",
+		"L": "Synaptic Weights Depth",
+		"MaxSessionCount": "Max session count",
+		"MaxIterations": "Total iteration limit"
+    }
+}

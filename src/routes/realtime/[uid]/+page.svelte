@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
     import { Neuron } from './templib/canvasNeuron';
 	import { Layer } from './templib/canvasLayer';
 	import { TPMm } from './templib/canvasTPMm';
@@ -14,8 +14,12 @@ let canvas
 let ctx
 let loaded = false
 
+let animationRequestId: number
+
 let simulationState: SimulationState[] = []
 let iter_index = 0
+
+let finishedSessions = []
 
 onMount(()=>{
     eventSrc = new EventSource(eventSourceUrl);
@@ -26,9 +30,15 @@ onMount(()=>{
             if (!loaded) loaded = true 
             simulationState = data["SessionState"]
             iter_index = 0    
-            console.log("prog");           
-        } else {
-            console.log(cmd);           
+        } 
+        if(cmd=="finished"){
+            finishedSessions.push(data);
+            finishedSessions = finishedSessions
+            if (data.SessionState.FinalState) {
+                simulationState= [data.SessionState.FinalState]
+            }
+        }
+         else {
         }
     };
     ctx = canvas.getContext('2d');
@@ -39,17 +49,19 @@ onMount(()=>{
     animate()
 })
 
-// // Create a Neuron instance
-// const tpmConfig: TPMConfig = {
-//     K: [16,8,4,2],
-//     N: [2,2,2,2],
-//     L: 3,
-//     M: 1,
-//     H: 4,
-// }
+
+onDestroy(() => {
+        if (!!eventSrc){
+            eventSrc.close()
+        }
+        if (typeof window !== 'undefined'){
+            cancelAnimationFrame(animationRequestId)
+        }
+    })
+    
 const tpmDiagram = new TPMm(0,0,TPM_config)
 const animate = () => {
-    requestAnimationFrame(animate)
+    animationRequestId = requestAnimationFrame(animate)
     if(!simulationState[iter_index]) {
         // console.log("ERROR: NO STATEE");
         iter_index = 0
@@ -72,6 +84,13 @@ let eventSrc : EventSource | null = null;
 
 <h1 class="text-3xl mx-4">Active Sesison: {sessionUid}</h1>
 <br />
-<div class="bg-red-100 mx-4">
+<div class="fixed bg-red-100 right-0 py-4 px-8 h-96 overflow-scroll">
+    <h2>Finished Sessions:</h2>
+    {#each finishedSessions as finishedSession}
+        Learn iterations: {finishedSession.SessionState.LearnIterations}
+        <br />
+    {/each}
+</div>
+<div class="mx-4">
     <canvas width="1024" height="1024" bind:this={canvas}></canvas>
 </div>

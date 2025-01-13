@@ -23,13 +23,18 @@ export const config = {
 		key: 'counts',
 		routes: ['/counts'],
 		loader: async () => (await import('./locales/en/counts.json')).default,
-	  },
-    {
-      locale: 'en',
-      key: 'graphs3d',
-      routes: ['/graphs3d'],
-      loader: async () => (await import('./locales/en/graphs3d.json')).default,
-    },
+  },
+  {
+    locale: 'en',
+    key: 'graphs3d',
+    routes: ['/graphs3d'],
+    loader: async () => (await import('./locales/en/graphs3d.json')).default,
+  },{
+    locale: 'en',
+    key: 'newSession',
+    routes: ['/newSession'],
+    loader: async () => (await import('./locales/en/newSession.json')).default,
+  },
   ],
 };
 

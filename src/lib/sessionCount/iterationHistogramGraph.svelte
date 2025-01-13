@@ -10,21 +10,47 @@
     
     export let seriesData
     export let axisData
-    
+
+
+    const normalizedFormmater = (maxValue: number) => {
+      const  formatter = (params) => { 
+            return `${params.seriesName}
+            <br /> ${params.marker} <strong>${params.name}:</strong> ${params.value*maxValue/100} (${params.value}%)
+            `;
+          }
+      return formatter
+    }
+
+    const defaultFormatter = () => {
+      const formatter = (params) => { 
+            return `${params.seriesName}
+            <br /> ${params.marker} <strong>${params.name}:</strong> ${params.value}%
+            `;
+          }
+      return formatter
+    }
+
     let options = {
   legend: {},
   title: {
             text: "",
           },
-  tooltip: {},
+  tooltip: {trigger: 'item', formatter: defaultFormatter()},
   xAxis: { type: 'category',
-    data: axisData.data
+    data: axisData.data,
+    axisLabel: {
+      interval: 0
+    }
    },
    yAxis: {},
   series: seriesData.map((entry) => {
     return {type: 'bar',
       name: entry.name,
-      data:entry.data}
+      data:entry.data,
+      tooltip: {
+        formatter: entry.normalizeFactor!=1 ? normalizedFormmater(entry.normalizeFactor) : defaultFormatter() 
+      } 
+    }
   })
 };
     

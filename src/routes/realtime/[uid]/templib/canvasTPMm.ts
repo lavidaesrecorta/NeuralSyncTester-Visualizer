@@ -37,8 +37,6 @@ class TPMm {
     }
 
     draw(ctx: CanvasRenderingContext2D): void {
-        ctx.fillStyle = 'orange'; // Neuron color (gold)
-        ctx.fillRect(this.x, this.y, this.width, this.height);
         this.layers.forEach((layer,index)=>{
             layer.draw(ctx)
         })

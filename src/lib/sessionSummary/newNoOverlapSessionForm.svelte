@@ -3,6 +3,8 @@
 	import type { NewNoOverlapRequestBody } from './sessionRequestTypes';
     export let executeNoOverlapRequest = async (postData: NewNoOverlapRequestBody) => {}
 
+    export let formLabels
+
 let status = "ready"
 
 
@@ -31,37 +33,37 @@ const onLayerCountChange = () => {
     }
 }
 </script>
-<div class="flex flex-col p-4 gap-2">
+<div class="flex flex-col gap-2">
     <!-- <label for="">{$_("learnRule")}</label>
     <select  class="rounded-sm" name="" id="" bind:value={postData.Rule} >
 
     </select> -->
-    <label for="" >{$t("H")}</label>
+    <label for="" >{formLabels.H}</label>
     <input bind:value={layerCount} on:change={()=>{onLayerCountChange()}} type="number" name=""  min="1" max="128">
 
-    <label for="" >{$t("N")}</label>
+    <label for="" >{formLabels.N}</label>
     <div class="flex gap-4 overflow-scroll">
         {#each postData.N as stimulusCount}
         <input bind:value={stimulusCount} type="number" name=""  min="2" max="128" id="">
         {/each}
     </div>
 
-    <label for="" >{$t("K_LAST")}</label>
+    <label for="" >{formLabels.K_LAST}</label>
     <input bind:value={postData.K_last} type="number" name=""  min="2" max="128" id="">
 
-    <label for="" >{$t("L")}</label>
+    <label for="" >{formLabels.L}</label>
     <input bind:value={postData.L} type="number" name=""  min="1" max="127" id="">
 
-    <label for="" >{$t("M")}</label>
+    <label for="" >{formLabels.M}</label>
     <input bind:value={postData.M} type="number" name=""  min="1" max="127" id="">
 
-    <label for="" >{$t("MaxSessionCount")}</label>
+    <label for="" >{formLabels.MaxSessionCount}</label>
     <input bind:value={postData.MaxSessionCount} type="number" name=""  min="1" id="">
 
-    <label for="" >{$t("MaxIterations")}</label>
+    <label for="" >{formLabels.MaxIterations}</label>
     <input bind:value={postData.MaxIterations} type="number" name=""  min="1" id="">
-
-    <button  on:click={()=> executeNoOverlapRequest(postData)} class={`${status=="loading"? "loading" : ""} my-2 rounded-sm`} disabled={status!="ready"} >{status=="loading"?"Loading...":"Request new Session"}</button>
+    
+    <button  on:click={()=> executeNoOverlapRequest(postData)} class={`${status=="loading"? "loading" : ""} my-2 rounded-sm`} disabled={status!="ready"} >{formLabels.buttons[status]}</button>
 </div>
 
 <style>
