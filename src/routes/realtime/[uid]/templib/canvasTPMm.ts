@@ -14,20 +14,22 @@ class TPMm {
     height: number;
     config: TPMConfig;
     layers: Layer[];
+    reversed: boolean;
 
     weights: number[][][]; //One number for each weight || layer -> neuron -> weight
     outputs: number[][]; //One number for each neuron || layer -> neuron
 
-    constructor(x: number, y: number, config: TPMConfig) {
+    constructor(x: number, y: number, config: TPMConfig, reversed:boolean = false) {
         this.x = x;
         this.y = y;
         this.config = config
+        this.reversed = reversed
         this.width = tpmWidth(config)
         this.height = tpmHeight(config)
         //Initialize all layers to 0 
         this.layers = []
         for (let i = 0; i < config.H; i++) {
-            const newLayer = new Layer(getLayerXOffset(i),this.y,config.K[i],config.N[i])
+            const newLayer = new Layer(this.x+getLayerXOffset(i, this.width,this.reversed),this.y,config.K[i],config.N[i])
             this.layers.push(newLayer)
         }
 

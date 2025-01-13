@@ -38,8 +38,7 @@ class Layer {
 
       // Draw the neuron as a rectangle
     draw(ctx: CanvasRenderingContext2D): void {
-        ctx.fillStyle = 'blue'; // Neuron color (gold)
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+
         this.neurons.forEach((neuron,index)=>{
             neuron.draw(ctx)
         })

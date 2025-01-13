@@ -4,6 +4,7 @@
 	import { Layer } from './templib/canvasLayer';
 	import { TPMm } from './templib/canvasTPMm';
 	import type { SimulationState, TPMConfig } from '$lib/realtime-viz/visualizer.config';
+	import { tpmWidth } from './templib/visualizerConfig';
 
     export let data
     const sessionUid = data.uid
@@ -43,7 +44,7 @@ onMount(()=>{
     };
     ctx = canvas.getContext('2d');
     if (ctx) {
-        tpmDiagram.draw(ctx)
+        tpmDiagramA.draw(ctx)
 
     }
     animate()
@@ -59,7 +60,9 @@ onDestroy(() => {
         }
     })
     
-const tpmDiagram = new TPMm(0,0,TPM_config)
+const tpmDiagramA = new TPMm(0,0,TPM_config)
+const currentNetworkWidth = tpmWidth(TPM_config)
+const tpmDiagramB = new TPMm(currentNetworkWidth,0,TPM_config, true)
 const animate = () => {
     animationRequestId = requestAnimationFrame(animate)
     if(!simulationState[iter_index]) {
@@ -69,9 +72,13 @@ const animate = () => {
     }
     // Clear the canvas before each draw
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    tpmDiagram.updateNetworkWeights(simulationState[iter_index].Weights_A)
-    tpmDiagram.updateNetworkOutputs(simulationState[iter_index].Outputs_A)
-    tpmDiagram.draw(ctx)
+    tpmDiagramA.updateNetworkWeights(simulationState[iter_index].Weights_A)
+    tpmDiagramA.updateNetworkOutputs(simulationState[iter_index].Outputs_A)
+    tpmDiagramB.updateNetworkWeights(simulationState[iter_index].Weights_B)
+    tpmDiagramB.updateNetworkOutputs(simulationState[iter_index].Outputs_B)
+    
+    tpmDiagramA.draw(ctx)
+    tpmDiagramB.draw(ctx)
 }
 
 
