@@ -1,3 +1,4 @@
+import { BACKEND_PORT, BACKEND_URL } from '$env/static/private';
 import * as db from '$lib/server/database';
 import { error } from '@sveltejs/kit';
 
@@ -17,6 +18,7 @@ export async function load() {
 	}
 	return {
 		// sessions: await db.getSurfaceGraphs()
-		sessions: sessions
+		sessions: sessions,
+		url: `http://${BACKEND_URL}:${BACKEND_PORT}/track-sessions`
 	};
 }

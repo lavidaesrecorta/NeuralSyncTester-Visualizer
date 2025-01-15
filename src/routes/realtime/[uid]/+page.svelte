@@ -83,7 +83,7 @@ const animate = () => {
 
 
 
-const eventSourceUrl = `http://127.0.0.1:8080/events?id=${sessionUid}`;
+const eventSourceUrl = data.url;
 let eventSrc : EventSource | null = null;
 
 // Draw the neuron

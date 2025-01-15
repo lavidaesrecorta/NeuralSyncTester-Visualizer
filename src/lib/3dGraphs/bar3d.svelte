@@ -15,6 +15,8 @@
     const series = getSeriesFromSet(chartObject.data,chartObject.labels.legends)
 
     onMount(async () => {
+      if (series == null) return
+
       try {
         // Dynamically import the SurfaceChart and Grid3D components
         const { Bar3DChart } = await import('echarts-gl/charts');
@@ -55,22 +57,13 @@
             selected: chartObject.labels.defaultLegend,
             top: 35,
             },
-          visualMap: {
-            show: false,
-            min: 0,
-            max: 250000,
-            dimension: 2,
-            inRange: {
-              color: ['#50a3f1', '#eac763', '#d94e5d'],
-            },
-          },
           // Define 3D axes
           xAxis3D: {
-            type: 'category',
+            type: 'value',
             name: chartObject.labels.xLabel,
           },
           yAxis3D: {
-            type: 'category',
+            type: 'value',
             name: chartObject.labels.yLabel,
           },
           zAxis3D: {
@@ -95,9 +88,13 @@
   </script>
   
   <div class="display h-[768px]">
-    {#if options.title}
+    {#if options.title && series != null}
       <Chart {init} {options} />
     {/if}
+    {#if series == null}
+      No data to show here.
+    {/if}
+
   </div>
   
   <style>

@@ -5,7 +5,7 @@
     export let data;   
     
     
-    const eventSourceUrl = `http://127.0.0.1:8080/track-sessions`;
+    const eventSourceUrl = data.url;
     let eventSrc : EventSource | null = null;
 
     let sessionList : Map<string,OpenSession> = data.sessions;
